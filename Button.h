@@ -1,22 +1,21 @@
 //
-// Created by Lawrence Degoma on 3/28/24.
+// Created by Lawrence Degoma on 5/21/24.
 //
 
 #ifndef BINARYSEARCHTREESFML_BUTTON_H
 #define BINARYSEARCHTREESFML_BUTTON_H
+
 #include <SFML/Graphics.hpp>
-#include <string>
 
 class Button {
-private:
-    sf::RectangleShape shape;
-    sf::Text text;
-
 public:
-    Button(float x, float y, float width, float height, sf::Font& font, std::string textString);
-
-    bool isClicked(sf::RenderWindow& window);
+    Button(float x, float y, float width, float height, sf::Font& font, std::string text);
     void draw(sf::RenderWindow& window);
+    bool isClicked(sf::RenderWindow& window);
+
+private:
+    sf::RectangleShape button;
+    sf::Text buttonText;
 };
 
 

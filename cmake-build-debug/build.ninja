@@ -56,8 +56,8 @@ build CMakeFiles/BinarySearchTreeSFML.dir/main.cpp.o: CXX_COMPILER__BinarySearch
   OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
   OBJECT_FILE_DIR = CMakeFiles/BinarySearchTreeSFML.dir
 
-build CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/BinarySearchTree.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
-  DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o.d
+build CMakeFiles/BinarySearchTreeSFML.dir/Application.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/Application.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
+  DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/Application.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   INCLUDES = -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
@@ -65,6 +65,27 @@ build CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o: CXX_COMPILER__
 
 build CMakeFiles/BinarySearchTreeSFML.dir/Button.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/Button.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
   DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/Button.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+  OBJECT_FILE_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+
+build CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/BinarySearchTree.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
+  DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+  OBJECT_FILE_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+
+build CMakeFiles/BinarySearchTreeSFML.dir/AVLTree.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/AVLTree.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
+  DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/AVLTree.cpp.o.d
+  FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
+  INCLUDES = -isystem /opt/homebrew/include
+  OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+  OBJECT_FILE_DIR = CMakeFiles/BinarySearchTreeSFML.dir
+
+build CMakeFiles/BinarySearchTreeSFML.dir/Node.cpp.o: CXX_COMPILER__BinarySearchTreeSFML_unscanned_Debug /Users/lawrence/CLionProjects/BinarySearchTreeSFML/Node.cpp || cmake_object_order_depends_target_BinarySearchTreeSFML
+  DEP_FILE = CMakeFiles/BinarySearchTreeSFML.dir/Node.cpp.o.d
   FLAGS = -g -std=gnu++17 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk -fcolor-diagnostics
   INCLUDES = -isystem /opt/homebrew/include
   OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
@@ -78,7 +99,7 @@ build CMakeFiles/BinarySearchTreeSFML.dir/Button.cpp.o: CXX_COMPILER__BinarySear
 #############################################
 # Link the executable BinarySearchTreeSFML
 
-build BinarySearchTreeSFML: CXX_EXECUTABLE_LINKER__BinarySearchTreeSFML_Debug CMakeFiles/BinarySearchTreeSFML.dir/main.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/Button.cpp.o | /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib /opt/homebrew/lib/libsfml-audio.2.6.1.dylib /opt/homebrew/lib/libsfml-window.2.6.1.dylib /opt/homebrew/lib/libsfml-system.2.6.1.dylib
+build BinarySearchTreeSFML: CXX_EXECUTABLE_LINKER__BinarySearchTreeSFML_Debug CMakeFiles/BinarySearchTreeSFML.dir/main.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/Application.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/Button.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/BinarySearchTree.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/AVLTree.cpp.o CMakeFiles/BinarySearchTreeSFML.dir/Node.cpp.o | /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib /opt/homebrew/lib/libsfml-audio.2.6.1.dylib /opt/homebrew/lib/libsfml-window.2.6.1.dylib /opt/homebrew/lib/libsfml-system.2.6.1.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX13.3.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/lib  /opt/homebrew/lib/libsfml-graphics.2.6.1.dylib  /opt/homebrew/lib/libsfml-audio.2.6.1.dylib  /opt/homebrew/lib/libsfml-window.2.6.1.dylib  /opt/homebrew/lib/libsfml-system.2.6.1.dylib
   OBJECT_DIR = CMakeFiles/BinarySearchTreeSFML.dir
