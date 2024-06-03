@@ -12,6 +12,7 @@ public:
     Button(float x, float y, float width, float height, sf::Font& font, std::string text);
     void draw(sf::RenderWindow& window);
     bool isClicked(sf::RenderWindow& window);
+    void move(float offsetX, float offsetY);
 
 private:
     sf::RectangleShape button;

@@ -27,9 +27,19 @@ void Button::draw(sf::RenderWindow& window) {
 bool Button::isClicked(sf::RenderWindow& window) {
     if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
         sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-        if (button.getGlobalBounds().contains(static_cast<sf::Vector2f>(mousePos))) {
+        sf::Vector2f translatedMousePos = window.mapPixelToCoords(mousePos);
+
+        // Get the global bounds of the button
+        sf::FloatRect globalBounds = button.getGlobalBounds();
+
+        if (globalBounds.contains(translatedMousePos)) {
             return true;
         }
     }
     return false;
+}
+
+void Button::move(float offsetX, float offsetY) {
+    button.move(offsetX, offsetY);
+    buttonText.move(offsetX, offsetY);
 }

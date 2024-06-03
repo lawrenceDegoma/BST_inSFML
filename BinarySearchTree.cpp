@@ -32,7 +32,7 @@ void BinarySearchTree::postorderTraversal(std::vector<int>& sequence) {
 }
 
 void BinarySearchTree::draw(sf::RenderWindow& window) {
-    draw(root, window, 450, 50, 300);
+    draw(root, window, 450, 50, 500);
 }
 
 void BinarySearchTree::setFont(const sf::Font& font) {
@@ -98,7 +98,7 @@ void BinarySearchTree::draw(Node* node, sf::RenderWindow& window, int x, int y, 
             window.draw(text);
         }
 
-        int newOffset = xOffset / 2;
+        int newOffset = xOffset / 2; // Increase spacing between nodes
 
         if (node->left != nullptr) {
             sf::Vertex line[] = {

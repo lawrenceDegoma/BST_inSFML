@@ -19,12 +19,6 @@ public:
     void run();
 
 private:
-    void processEvents();
-    void update();
-    void render();
-    void handleButtonClicks();
-    void traverseTree(BinarySearchTree& tree, std::vector<int>& sequence, TraversalType type);
-
     sf::RenderWindow window;
     sf::Font font;
     Button inorderButton;
@@ -33,13 +27,21 @@ private:
     Button pushButton;
     Button resetButton;
     Button toggleButton;
-
-    TreeType treeType;
     BinarySearchTree tree;
     AVLTree avlTree;
-
+    enum class TreeType { BST, AVL };
+    TreeType treeType;
+    enum class TraversalType { None, Inorder, Preorder, Postorder };
     TraversalType currentTraversal;
     std::vector<int> currentSequence;
+    bool isDragging;
+    sf::Vector2f lastMousePos;
+
+    void processEvents();
+    void update();
+    void render();
+    void handleButtonClicks();
+    void traverseTree(BinarySearchTree& tree, std::vector<int>& sequence, TraversalType type);
 };
 
 #endif //BINARYSEARCHTREESFML_APPLICATION_H

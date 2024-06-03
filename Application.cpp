@@ -13,7 +13,8 @@ Application::Application()
           resetButton(750, 700, 100, 50, font, "Reset"),
           toggleButton(750, 600, 100, 50, font, "Toggle"),
           treeType(TreeType::BST),
-          currentTraversal(TraversalType::None) {
+          currentTraversal(TraversalType::None),
+          isDragging(false) {
 
     window.setFramerateLimit(60);
 
@@ -37,11 +38,34 @@ void Application::run() {
 void Application::processEvents() {
     sf::Event event;
     while (window.pollEvent(event)) {
-        if (event.type == sf::Event::Closed) {
-            window.close();
-        }
-        if (event.type == sf::Event::MouseButtonPressed) {
-            handleButtonClicks();
+        switch (event.type) {
+            case sf::Event::Closed:
+                window.close();
+                break;
+            case sf::Event::MouseButtonPressed:
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    isDragging = true;
+                    lastMousePos = window.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
+                }
+                handleButtonClicks();
+                break;
+            case sf::Event::MouseButtonReleased:
+                if (event.mouseButton.button == sf::Mouse::Left) {
+                    isDragging = false;
+                }
+                break;
+            case sf::Event::MouseMoved:
+                if (isDragging) {
+                    sf::Vector2f newMousePos = window.mapPixelToCoords({ event.mouseMove.x, event.mouseMove.y });
+                    sf::Vector2f delta = lastMousePos - newMousePos;
+                    sf::View view = window.getView();
+                    view.setCenter(view.getCenter() - delta);
+                    window.setView(view);
+                    lastMousePos = newMousePos;
+                }
+                break;
+            default:
+                break;
         }
     }
 }
@@ -59,6 +83,22 @@ void Application::render() {
         avlTree.draw(window);
     }
 
+    // Update button positions regardless of dragging
+    sf::Vector2f delta = sf::Vector2f(0.f, 0.f);
+    if (isDragging) {
+        // Adjust button positions based on the mouse movement
+        delta = lastMousePos - window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        lastMousePos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    }
+
+    inorderButton.move(-delta.x, -delta.y);
+    preorderButton.move(-delta.x, -delta.y);
+    postorderButton.move(-delta.x, -delta.y);
+    pushButton.move(-delta.x, -delta.y);
+    resetButton.move(-delta.x, -delta.y);
+    toggleButton.move(-delta.x, -delta.y);
+
+    // Draw buttons
     inorderButton.draw(window);
     preorderButton.draw(window);
     postorderButton.draw(window);
@@ -66,6 +106,7 @@ void Application::render() {
     resetButton.draw(window);
     toggleButton.draw(window);
 
+    // Draw traversal sequence text if applicable
     if (currentTraversal != TraversalType::None) {
         sf::Text sequenceText;
         sequenceText.setFont(font);
