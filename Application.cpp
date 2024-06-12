@@ -5,17 +5,17 @@
 #include "Application.h"
 
 Application::Application()
-        : window(sf::VideoMode(900, 800), "Tree Visualizer"),
-          inorderButton(150, 700, 100, 50, font, "Inorder"),
-          preorderButton(300, 700, 100, 50, font, "Preorder"),
-          postorderButton(450, 700, 100, 50, font, "Postorder"),
-          pushButton(600, 700, 100, 50, font, "Push"),
-          resetButton(750, 700, 100, 50, font, "Reset"),
-          toggleButton(750, 600, 100, 50, font, "Toggle"),
+        : window(sf::VideoMode(1280, 720), "Tree Visualizer"),
+          inorderButton(150, 600, 100, 50, font, "Inorder"),
+          preorderButton(300, 600, 100, 50, font, "Preorder"),
+          postorderButton(450, 600, 100, 50, font, "Postorder"),
+          pushButton(600, 600, 100, 50, font, "Push"),
+          resetButton(750, 600, 100, 50, font, "Reset"),
+          toggleButton(750, 500, 100, 50, font, "Toggle"),
           treeType(TreeType::BST),
           currentTraversal(TraversalType::None),
-          isDragging(false) {
-
+          isDragging(false),
+          bTree() { // Explicitly initialize bTree
     window.setFramerateLimit(60);
 
     if (!font.loadFromFile("arial.ttf")) {
@@ -25,6 +25,13 @@ Application::Application()
 
     tree.setFont(font);
     avlTree.setFont(font);
+    bTree.setFont(font); // Set font for BTree
+
+    // Initialize the tree type text
+    treeTypeText.setFont(font);
+    treeTypeText.setCharacterSize(20);
+    treeTypeText.setFillColor(sf::Color::Black);
+    updateTreeTypeText();
 }
 
 void Application::run() {
@@ -77,10 +84,16 @@ void Application::update() {
 void Application::render() {
     window.clear(sf::Color(173, 216, 230)); // Clear with background color
 
-    if (treeType == TreeType::BST) {
-        tree.draw(window);
-    } else {
-        avlTree.draw(window);
+    switch (treeType) {
+        case TreeType::BST:
+            tree.draw(window);
+            break;
+        case TreeType::AVL:
+            avlTree.draw(window);
+            break;
+        case TreeType::BTree:
+            bTree.draw(window);
+            break;
     }
 
     // Update button positions regardless of dragging
@@ -97,6 +110,7 @@ void Application::render() {
     pushButton.move(-delta.x, -delta.y);
     resetButton.move(-delta.x, -delta.y);
     toggleButton.move(-delta.x, -delta.y);
+    treeTypeText.move(-delta.x, -delta.y);
 
     // Draw buttons
     inorderButton.draw(window);
@@ -105,6 +119,9 @@ void Application::render() {
     pushButton.draw(window);
     resetButton.draw(window);
     toggleButton.draw(window);
+
+    // Draw tree type text
+    window.draw(treeTypeText);
 
     // Draw traversal sequence text if applicable
     if (currentTraversal != TraversalType::None) {
@@ -140,44 +157,85 @@ void Application::render() {
 void Application::handleButtonClicks() {
     if (pushButton.isClicked(window)) {
         int value = rand() % 100 + 1;
-        if (treeType == TreeType::BST) {
-            tree.insert(value);
-        } else {
-            avlTree.insert(value);
+        switch (treeType) {
+            case TreeType::BST:
+                tree.insert(value);
+                break;
+            case TreeType::AVL:
+                avlTree.insert(value);
+                break;
+            case TreeType::BTree:
+                bTree.insert(value);
+                break;
         }
     }
     if (resetButton.isClicked(window)) {
-        if (treeType == TreeType::BST) {
-            tree.clear();
-        } else {
-            avlTree.clear();
+        switch (treeType) {
+            case TreeType::BST:
+                tree.clear();
+                break;
+            case TreeType::AVL:
+                avlTree.clear();
+                break;
+            case TreeType::BTree:
+                bTree.clear();
+                break;
         }
     }
     if (toggleButton.isClicked(window)) {
-        treeType = (treeType == TreeType::BST) ? TreeType::AVL : TreeType::BST;
+        switch (treeType) {
+            case TreeType::BST:
+                treeType = TreeType::AVL;
+                break;
+            case TreeType::AVL:
+                treeType = TreeType::BTree;
+                break;
+            case TreeType::BTree:
+                treeType = TreeType::BST;
+                break;
+        }
+        updateTreeTypeText();
     }
     if (inorderButton.isClicked(window)) {
         currentTraversal = TraversalType::Inorder;
-        if (treeType == TreeType::BST) {
-            traverseTree(tree, currentSequence, currentTraversal);
-        } else {
-            traverseTree(avlTree, currentSequence, currentTraversal);
+        switch (treeType) {
+            case TreeType::BST:
+                traverseTree(tree, currentSequence, currentTraversal);
+                break;
+            case TreeType::AVL:
+                traverseTree(avlTree, currentSequence, currentTraversal);
+                break;
+            case TreeType::BTree:
+                traverseTree(bTree, currentSequence, currentTraversal);
+                break;
         }
     }
     if (preorderButton.isClicked(window)) {
         currentTraversal = TraversalType::Preorder;
-        if (treeType == TreeType::BST) {
-            traverseTree(tree, currentSequence, currentTraversal);
-        } else {
-            traverseTree(avlTree, currentSequence, currentTraversal);
+        switch (treeType) {
+            case TreeType::BST:
+                traverseTree(tree, currentSequence, currentTraversal);
+                break;
+            case TreeType::AVL:
+                traverseTree(avlTree, currentSequence, currentTraversal);
+                break;
+            case TreeType::BTree:
+                traverseTree(bTree, currentSequence, currentTraversal);
+                break;
         }
     }
     if (postorderButton.isClicked(window)) {
         currentTraversal = TraversalType::Postorder;
-        if (treeType == TreeType::BST) {
-            traverseTree(tree, currentSequence, currentTraversal);
-        } else {
-            traverseTree(avlTree, currentSequence, currentTraversal);
+        switch (treeType) {
+            case TreeType::BST:
+                traverseTree(tree, currentSequence, currentTraversal);
+                break;
+            case TreeType::AVL:
+                traverseTree(avlTree, currentSequence, currentTraversal);
+                break;
+            case TreeType::BTree:
+                traverseTree(bTree, currentSequence, currentTraversal);
+                break;
         }
     }
 }
@@ -194,5 +252,57 @@ void Application::traverseTree(BinarySearchTree& tree, std::vector<int>& sequenc
         case TraversalType::Postorder:
             tree.postorderTraversal(sequence);
             break;
+        default:
+            break;
     }
+}
+
+void Application::traverseTree(AVLTree& tree, std::vector<int>& sequence, TraversalType type) {
+    sequence.clear();
+    switch (type) {
+        case TraversalType::Inorder:
+            tree.inorderTraversal(sequence);
+            break;
+        case TraversalType::Preorder:
+            tree.preorderTraversal(sequence);
+            break;
+        case TraversalType::Postorder:
+            tree.postorderTraversal(sequence);
+            break;
+        default:
+            break;
+    }
+}
+
+void Application::traverseTree(BTree& tree, std::vector<int>& sequence, TraversalType type) {
+    sequence.clear();
+    switch (type) {
+        case TraversalType::Inorder:
+            tree.inorderTraversal(sequence);
+            break;
+        case TraversalType::Preorder:
+            tree.preorderTraversal(sequence);
+            break;
+        case TraversalType::Postorder:
+            tree.postorderTraversal(sequence);
+            break;
+        default:
+            break;
+    }
+}
+
+void Application::updateTreeTypeText() {
+    switch (treeType) {
+        case TreeType::BST:
+            treeTypeText.setString("Current Tree: BST");
+            break;
+        case TreeType::AVL:
+            treeTypeText.setString("Current Tree: AVL");
+            break;
+        case TreeType::BTree:
+            treeTypeText.setString("Current Tree: BTree");
+            break;
+    }
+    // Set the initial position of the text
+    treeTypeText.setPosition(50, 50);  // Adjust the position as needed
 }

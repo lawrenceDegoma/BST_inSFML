@@ -16,6 +16,10 @@ add_executable(BinarySearchTreeSFML main.cpp
         TraversalType.h
         Node.cpp
         Node.h
+        Helper.cpp
+        Helper.h
+        BTree.cpp
+        BTree.h
 )
 target_link_libraries(BinarySearchTreeSFML sfml-graphics sfml-audio)
 find_package(SFML 2.5 COMPONENTS graphics audio REQUIRED)
